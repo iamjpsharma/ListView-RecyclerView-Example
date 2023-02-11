@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,14 +20,24 @@ public class RecyclerViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
+        recyclerView = findViewById(R.id.scout_recycler_view);
 
-        initView();
+
+        initViewLinear();
+
+
     }
 
-    private void initView() {
-        // Initialize RecyclerView and set Adapter
-        recyclerView = findViewById(R.id.scout_recycler_view);
+    private void initViewLinear() {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        scoutArrayList = new ArrayList<>();
+        adapter = new ScoutAdapter(this,scoutArrayList);
+        recyclerView.setAdapter(adapter);
+        createList();
+    }
+
+    private void initViewGridLayout() {
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         scoutArrayList = new ArrayList<>();
         adapter = new ScoutAdapter(this,scoutArrayList);
         recyclerView.setAdapter(adapter);
